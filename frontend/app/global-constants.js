@@ -29,4 +29,6 @@ export const ActionType = keyMirror({
   LOGIN_REQUEST:null,
   LOGIN_SUCCESS:null,
   LOGIN_FAILED:null,
+  FETCH_CURRENT_USER_SUCCESS: null,
+  LOG_OUT: null,
 });

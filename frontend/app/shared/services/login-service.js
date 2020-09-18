@@ -13,7 +13,7 @@ class LoginService {
   }
 
   isLoggedIn = () => {
-    const token = localStorage.getItem(this.storageKey.token);
+    const token = this.getToken();
     return !_.isEmpty(token);
   }
 
@@ -22,7 +22,12 @@ class LoginService {
     if (_.isNil(token)) {
       toBeStoredToken = '';
     }
+    axios.defaults.headers
     localStorage.setItem(this.storageKey.token, toBeStoredToken);
+  }
+
+  getToken = () => {
+    return localStorage.getItem(this.storageKey.token);
   }
 }
 

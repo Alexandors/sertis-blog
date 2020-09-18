@@ -74,4 +74,15 @@ router.post('/login', function(req, res, next) {
   });
 });
 
+// get me
+router.get('/me', securityService.securityMiddleware, function(req, res, next) {
+  userService.getUserInfoById(req.securityContext.userId).then((result) => {
+    if (_.isNil(result)) {
+      res.status(404).send();
+      return;
+    }
+    res.status(200).send(result);
+  });
+});
+
 module.exports = router;

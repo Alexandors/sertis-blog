@@ -68,3 +68,10 @@ exports.getUserInfoByUsername = async (username) => {
     return user;
 }
 
+exports.getUserInfoById = async (id) => {
+    const user = await this.getUser(id)
+    _.set(user, 'password', null);
+    return user;
+}
+
+

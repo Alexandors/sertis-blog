@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import LoginService from 'services/login-service';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,7 +30,9 @@ const LoginComponent = () => {
         case ActionType.LOGIN_SUCCESS:
           return state.set('token', _.get(action, ['payload', 'token']));
         case ActionType.LOGIN_FAILED:
-          return state.set('token', null).set('isLoginFail', true);
+          return state.set('token', '').set('isLoginFail', true);
+        case ActionType.LOG_OUT:
+          return state.set('token', '');
         default:
           return state;
       }
@@ -38,20 +40,27 @@ const LoginComponent = () => {
   });
   const token = useSelector((state) => state.getIn([reducerKey, 'token']));
   const isLoginFail = useSelector((state) => state.getIn([reducerKey, 'isLoginFail']));
+  const currentUser = useSelector((state) => state.getIn(['app', 'currentUser']));
 
   const [show, setShow] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    LoginService.setToken(token);
     if (!_.isEmpty(token)) {
       setShow(false);
     }
-  }, [token])
+  }, [token]);
+
+  useEffect(() => {
+    if (!_.isNil(currentUser)) {
+      setDisplayName(currentUser.username);
+    }
+  }, [currentUser]);
 
   const onLogin = () => {
     dispatch(actions.Login({
@@ -66,12 +75,23 @@ const LoginComponent = () => {
     }
   }
 
+  const logOut = () => {
+    dispatch(actions.Logout());
+  }
+
   return (
     <div className="login-component">
       <div className="login-inner">
         {
           LoginService.isLoggedIn() === false
           && <Button className="login-button" onClick={handleShow}>Login</Button>
+        }
+        {
+          LoginService.isLoggedIn() === true
+          && <Fragment>
+            <div className="displayName">{displayName}</div>
+            <Button variant="info" onClick={logOut}>Log out</Button>
+          </Fragment>
         }
       </div>
 

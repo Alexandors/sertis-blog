@@ -16,6 +16,7 @@ import { translationMessages } from './i18n';
 
 import 'sanitize.css/sanitize.css';
 import './styles/scss/index.scss';
+import LoginService from 'services/login-service';
 
 
 const initialState = {};
@@ -23,6 +24,11 @@ const store = configureStore(initialState, history);
 
 const startApp = () => {
   axios.defaults.baseURL = 'http://localhost:3001';
+
+  axios.interceptors.request.use(function (config) {
+    config.headers.Authorization =  `Bearer ${LoginService.getToken()}`;
+    return config;
+  });
 
   const render = () => {
     ReactDOM.render(
