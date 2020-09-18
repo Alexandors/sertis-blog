@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mangoDB = require('./src/data-access-layer/mangodb-connection');
+var cors = require('cors')
 
 var usersRouter = require('./routes/users');
 var articlesRouter = require('./routes/articles');
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors())
 
 app.use('/users', usersRouter);
 app.use('/articles', articlesRouter);

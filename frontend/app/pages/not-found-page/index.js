@@ -3,7 +3,7 @@ import './style.css';
 
 export default class NotFound extends React.PureComponent {
 
-  getDisplayMessage = () => 'Page Not Found.';
+  getDisplayMessage = () => 'Page Not Found';
 
   render() {
     return (

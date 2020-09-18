@@ -24,4 +24,6 @@ export const ActionType = keyMirror({
   SERVER_ERROR: null,
   SHOW_LOADING_MASK: null,
   CLEAR_NOTIFICATION_MESSAGE: null,
+  FETCH_ARTICLES_REQUEST:null,
+  FETCH_ARTICLES_SUCCESS:null,
 });

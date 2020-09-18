@@ -6,6 +6,7 @@ import { Router } from 'react-router-dom';
 
 import '!file-loader?name=[name].[ext]!./favicon.ico';
 import App from 'containers/app';
+import axios from 'axios';
 
 import configureStore from './configureStore';
 import history from './history';
@@ -21,12 +22,14 @@ const initialState = {};
 const store = configureStore(initialState, history);
 
 const startApp = () => {
-  const render = (messages) => {
+  axios.defaults.baseURL = 'http://localhost:3001';
+
+  const render = () => {
     ReactDOM.render(
       <Provider store={store}>
-          <Router history={history}>
-            <App/>
-          </Router>
+        <Router history={history}>
+          <App/>
+        </Router>
       </Provider>,
       document.getElementById('app')
     );

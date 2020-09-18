@@ -1,0 +1,10 @@
+.blog-page {
+  .article-card {
+    width: 30rem;
+    margin: 5px;
+
+    .card-title {
+      text-overflow: ellipsis;
+    }
+  }
+}
