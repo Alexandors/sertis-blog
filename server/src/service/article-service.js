@@ -35,6 +35,7 @@ exports.createArticle = async ({name, content, authorId, status, category}) => {
         return await newArticle.save()
     } catch (ex) {
         console.error(ex)
+        throw ex;
     }
 }
 
@@ -60,6 +61,7 @@ exports.updateArticle = async ({_id, name, content, authorId, status, category})
       }});
     } catch (ex) {
         console.error(ex)
+        throw ex;
     }
 }
 
@@ -91,6 +93,27 @@ exports.getArticleCategories = async () => {
     return ['Science', 'Physics', 'Technology'];
 }
 
+exports.deleteArticle = async ({id, userId}) => {
+    const article = await this.getArticleById(id);
+
+    if (_.isNil(article)) {
+        throw 'Article not found'
+    }
+
+    const user = await userService.getUser(userId);
+
+    if (_.get(user, '_id')+'' !== article.authorId+'') {
+        throw "You don't have permission to delete this article"
+    }
+
+    try {
+        await articleModel.deleteOne({_id: article._id});
+    }catch (ex) {
+        console.error(ex);
+        throw ex;
+    }
+}
+
 const assembleAritle = (article, user) => {
     const {_doc} = article;
     return {..._doc, author: user}
@@ -102,3 +125,5 @@ const getArticleStatus = (status) => {
     }
     return constants.ArticleStatus.Draft;
 }
+
+

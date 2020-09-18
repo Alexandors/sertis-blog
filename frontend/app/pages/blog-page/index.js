@@ -116,9 +116,7 @@ const BlogPage = () => {
     setEditId(null);
 
     if (isNeedUpdate === true) {
-      dispatch(actions.clearArticleList());
-      setCurrentPage(0);
-      onFetchArticles(0);
+      forceUpdate();
     }
   };
 
@@ -139,13 +137,23 @@ const BlogPage = () => {
     }
   }
   const onDeleteArticle = (id) => {
-    setDeleteId(id)
+    setDeleteId(id);
     handleShowDeleteDialog();
   }
 
-  const onDeleteDialogClose = () => {
+  const onDeleteDialogClose = (isNeedUpdate) => {
     setDeleteId(null);
     handleCloseDeleteDialog();
+
+    if (isNeedUpdate === true) {
+      forceUpdate();
+    }
+  }
+
+  const forceUpdate = () => {
+    dispatch(actions.clearArticleList());
+    setCurrentPage(0);
+    onFetchArticles(0);
   }
 
   return (

@@ -83,3 +83,20 @@ export const clearArticleList = () => (dispatch) => {
     type: ActionType.CLEAR_ARTICLE_LIST,
   });
 }
+
+export const deleteArticle = (id) => (dispatch) => {
+  ArticleService.delete(id).then(() => {
+    dispatch({
+      type: ActionType.DELETE_ARTICLE_SUCCESS,
+    });
+  }).catch((err) => {
+    dispatch({ type: ActionType.SERVER_ERROR });
+    dispatch(showServerError(err));
+  });
+}
+
+export const clearDeleteArticle = () => (dispatch) => {
+  dispatch({
+    type: ActionType.CLEAR_DELETE_ARTICLE,
+  });
+}

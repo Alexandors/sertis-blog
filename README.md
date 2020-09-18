@@ -30,4 +30,28 @@ To start:
 
 
 
+## Usage
+There are 2 users in the system.
+
+---------------------
+
+Username: admin
+
+Pass: admin123
+
+---------------------
+
+Username: user1
+
+Pass: user1234
+
+-----------------------
+
+However, you can create user via the API `/users`. You will have to login to `admin` account and use JWT token that you get from login as a header `Authorization` `Bearer <JWT Token>`
+
+There are 2 fields to create a user which are required:
+
+`username` and `password`
+
+
 

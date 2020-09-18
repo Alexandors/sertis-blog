@@ -93,5 +93,23 @@ router.get('/:id', function(req, res, next) {
 
 });
 
+//delete an Article
+router.delete('/:id', securityService.securityMiddleware, function(req, res, next) {
+
+    const request = {
+        id: req.params.id,
+        userId: req.securityContext.userId,
+    }
+
+    articleService.deleteArticle(request).then(result => {
+        res.status(200).send();
+    }).catch(ex => {
+        console.error(ex);
+        res.status(400)
+        res.send(ex.message);
+    })
+
+});
+
 
 module.exports = router;
