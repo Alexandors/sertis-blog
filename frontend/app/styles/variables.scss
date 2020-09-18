@@ -1,0 +1,96 @@
+// color
+$color-grey: #252a37;
+$color-blue: #2255ce;
+$color-red: #ff0000;
+$color-cd-red: #dd381d;
+$color-breadcrumb: #f7f7f7;
+$color-charcoal: #313d47;
+$color-auro-metal-saurus: #6a7682;
+$light-orange             : #fff7f3 !default;
+$deep-carrot-orange       : #f36f31 !default;
+
+$primary                  : #06b5b3 !default;
+$secondary                : #f36f31 !default;
+$disable                  : #c6cbd4 !default;
+$error                    : #e24242 !default;
+$lavender-gray            : #c6cbd4 !default;
+$pearl-aqua               : #7bd5d4 !default;
+$alice-blue               : #f0fafa !default;
+$tiffany-blue             : #06b5b3 !default;
+$light-lavender-gray      : #e2e5e9;
+$white                    : #fff;
+$white-smoke              : #f6f7f8;
+$white-smoke-dark         : #f3f3f3;
+$charcoal                 : #313d47;
+$silver                   : #ccc;
+$carmine-pink             : #e74c3c;
+$venetian-red             : #bf0808;
+$timberwolf               : #d8d8d8;
+$munsell                  : #edf0f4;
+$light-sea-green          : #179b9a;
+$taupe                    : #333333;
+$taupe-gray               : #8b8f92;
+$pale-blue                : #bfeae9;
+$charcoal-dark            : #444;
+$gainsboro                : #ddd;
+$slate-gray               : #6d8397;
+$deep-saffron             : #fda428;
+$filter-box-color         : #e4e9ef;
+$link-water               : #d4d8dc;
+$black                    : #000;
+$brandeis-blue            : #196ee8;
+$color-gray               : #f6f7f9;
+$color-cyan-light         : #c3dae5;
+$color-solitude           : #e5e9ef;
+$prussian-blue            : #0b3051;
+$outer-space              : #484848;
+$languid-lavender         : #cccddb;
+$sunset-orange            : #ed5f56;
+$rust                     : #c14a12;
+$dark-dray                : #aaaaaa;
+$platinum                 : #e0e0e0;
+$light-gray               : #f6f7f84d;
+$gray-80                  : #00000080;
+$color-light-cyan-blue    : #9dacb9;
+$color-light-cyan-brown   : #83838380;
+$color-light-brown        : #a18c8c80;
+$color-light-aqua         : #effbfb;
+$pistachio                : #97cd5c;
+$gray-40                  : #666;
+$dark-jungle-green        : #1a1a1a;
+$light-slate-gray         : #8082a3;
+$grey-platinum            : #E8E9E9;
+
+$grid-breakpoints: (
+        xs: 0,
+        sm: 360px,
+        md: 768px,
+        lg: 992px,
+        xl: 1280px
+);
+$grid-columns-map: (
+        xs: 6,
+        sm: 6,
+        md: 8,
+        lg: 12,
+        xl: 12,
+);
+$container-max-widths: (
+        sm: 100%,
+        md: 100%,
+        lg: 100%,
+        xl: 100%
+);
+$enable-ampos-grid-classes: true !default;
+$grid-gutter-width: 30px;
+
+$zindex: (
+        dropdown: 100,
+        question-form-dialog-modal-header: 2,
+        loading: 1000
+);
+
+$enable-ampos-grid-classes: true !default;
+$input-placeholder-color:   $lavender-gray;
+
+

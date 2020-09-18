@@ -1,0 +1,376 @@
+@import '../variables.scss';
+
+:root {
+  font-size: 10px;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+}
+
+
+#app {
+  min-height: 100%;
+  min-width: 100%;
+  background: $white;
+}
+
+a,
+a:hover {
+  color: $charcoal;
+  text-decoration: none;
+}
+
+:focus {
+  outline: 0;
+}
+
+h1 { font-size: 50px; }
+article { display: block; text-align: left; width: 650px; margin: 0 auto; }
+
+.btn {
+  border: 1px solid $timberwolf;
+
+  &.btn-primary {
+    border: 1px solid $primary;
+  }
+
+  &.btn-secondary {
+    &:not(:disabled):not(.disabled):active, &:focus, &:hover {
+      background-color: $rust !important;
+      border-color: $rust !important;;
+      color: $white;
+    }
+  }
+}
+
+button:focus,
+.btn:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+.btn:disabled {
+  cursor: default;
+}
+
+.form-control:focus {
+  border-color: $primary;
+}
+
+.link-cursor {
+  cursor: pointer;
+}
+
+.was-validated .form-control:invalid,
+.was-validated .form-control:invalid:focus,
+.form-control.is-invalid,
+.form-control.is-invalid:focus{
+  background-image: none;
+  border-color: $error;
+  box-shadow: none;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.breadcrumb {
+  padding: 0.75rem 0;
+}
+
+.search-button.input-group-append {
+  padding: 6px 12px;
+  border: 1px solid $silver;
+}
+
+.search-icon-border {
+  .search-button {
+    left: 0;
+    .icon-search {
+      line-height: 2em;
+      padding: 0 13px;
+    }
+    .icon-clear {
+      line-height: 1em;
+    }
+  }
+}
+
+.login-form {
+  .form-group {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+}
+
+.ampos-pagination {
+  li {
+    a {
+      position: relative;
+      float: left;
+      padding: 6px 12px;
+      margin-left: -1px;
+      line-height: 1.42857143;
+      color: $taupe;
+      text-decoration: none;
+      background-color: $white;
+      border: 1px solid $gainsboro;
+    }
+  }
+}
+
+.loading-overlay {
+  background-color: $white;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  opacity: 0.5;
+  z-index: 1003;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.modal {
+  .modal-header {
+    padding: 15px 30px 10px 30px;
+    .close {
+      color: $taupe-gray;
+      padding: 0;
+      font-weight: lighter;
+    }
+  }
+  .modal-body {
+    min-height: 150px;
+    padding: 15px 30px;
+  }
+  .modal-footer {
+    padding: 15px 30px;
+    justify-content: center;
+    box-shadow: -1px -2px 3px 0px rgba(0, 0, 0, 0.07);
+  }
+
+  &.form {
+    .has-feedback {
+      .form-control-feedback {
+        display: none;
+      }
+    }
+    .has-error{
+      .form-control-feedback {
+        position: unset;
+        display: inline;
+        font-size: 12px;
+        line-height: 1.2em;
+      }
+    }
+  }
+
+  &.confirm {
+    .modal-dialog {
+      max-width: 620px;
+    }
+    .modal-header {
+      border: none;
+    }
+    .modal-body {
+      min-height: 73px;
+      max-height: 190px;
+    }
+    .modal-footer {
+      border: none;
+    }
+  }
+}
+.tooltip {
+  .tooltip-inner {
+    white-space: pre-wrap;
+    background-color: $slate-gray;
+    padding: 12px;
+    border-radius: 0;
+    opacity: 1;
+    text-align: left;
+  }
+  .arrow::before {
+    border-top-color: $slate-gray;
+  }
+}
+
+
+.modal-backdrop.fade.in {
+  background-color: $charcoal-dark;
+  opacity: 0.7;
+}
+.fade.in {
+  opacity: 1;
+}
+
+.notification {
+  top: 62px;
+  left: -20px;
+}
+
+.ampos-confirm-modal {
+  .modal-header {
+    display: block;
+    padding-left: 15px;
+  }
+  &.modal-centered {
+    top: 37%;
+  }
+}
+
+.container-custom {
+  max-width: 1280px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 auto;
+}
+
+@-webkit-keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-custom {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-custom {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .modal-lg {
+    max-width: 900px;
+
+  }
+}
+
+.access-denied {
+  padding-top: 100px;
+  height: 100vh;
+}
+
+
+#upload-tooltip-popover {
+  padding-bottom: 5px;
+  margin-top: -5px;
+  .tooltip-arrow {
+    left: 50%;
+    opacity: 1;
+    position: absolute;
+    margin-left: -5px;
+    display: block !important;
+    border-style: solid;
+    border-width: 5px 5px 0;
+    border-color: transparent;
+    border-top-color: #6d8397;
+    bottom: 0;
+  }
+}
+.pagination-border {
+  box-shadow: 0px -11px 9px -10px #ccc;
+  padding-top: 15px;
+  .ampos-pagination-goto-page {
+    margin: 0;
+  }
+}
+
+.form {
+  &-label {
+    color: $charcoal;
+    font-weight: bold;
+    display: flex;
+  }
+  &-control {
+    height: calc(2.2em + 0.75rem + 2px);
+  }
+  &-required:after {
+    color: $deep-carrot-orange;
+    content: ' *';
+    margin-left: 5px;
+  }
+  &-group {
+    &.is-error {
+      .multi-select, .single-select {
+        > div {
+          border-color: #dc3545;
+        }
+      }
+      .multi-select ~ .invalid-feedback,
+      .single-select ~ .invalid-feedback {
+        display: block;
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 80%;
+        color: #dc3545;
+      }
+    }
+  }
+}
+.multi-select {
+  .multi-select {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  .multi-select__value-container--has-value {
+    max-height: 117px;
+    overflow: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-custom {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .modal-lg {
+    max-width: 900px;
+  }
+}
+.ampos-image-cropper-modal {
+  &.modal-lg {
+    max-width: 800px;
+  }
+  .modal-header {
+    display: inline-block !important;
+  }
+  .modal-body {
+    overflow: auto !important;
+    max-height: 520px !important;
+  }
+  .modal-footer .btn+.btn {
+    margin-left: 5px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .ampos-image-cropper-modal {
+    &.modal-dialog-centered {
+      top: 7%;
+    }
+  }
+}

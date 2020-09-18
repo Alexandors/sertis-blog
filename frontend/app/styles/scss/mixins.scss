@@ -1,0 +1,29 @@
+@import "~bootstrap/scss/_mixins.scss";
+
+@mixin scrollbar($thumb: $cadet-grey, $scrollbar: transparent) {
+  will-change: transform;
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar {
+    position: absolute;
+    width: 8px;
+    border-radius: 4px;
+    background-color: $scrollbar;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: $thumb;
+    visibility: hidden;
+    @include media-breakpoint-down(sm) {
+      visibility: visible;
+    }
+    @include media-breakpoint-down(md) {
+      visibility: visible;
+    }
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+  }
+}

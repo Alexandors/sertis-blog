@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <link rel="preload" href="<%= htmlWebpackPlugin.files.css[css] %>" as="style">
+  <% } %>
+  <link rel="preload" href="/journey/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2" as="font" crossorigin>
+  <link rel="preload" href="/journey/S6uyw4BMUTPHjx4wXiWtFCc.woff2" as="font" crossorigin>
+  <link rel="preload" href="/journey/caveatForReward.woff2" as="font" crossorigin>
+  <style>
+    /* latin */
+    @font-face {
+      font-family: 'Lato';
+      font-display: swap;
+      font-style: normal;
+      font-weight: 400;
+      src: local('Lato Regular'), local('Lato-Regular'), url(/journey/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Lato';
+      font-display: swap;
+      font-style: normal;
+      font-weight: 700;
+      src: local('Lato Bold'), local('Lato-Bold'), url(/journey/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Caveat';
+      font-display: swap;
+      font-style: normal;
+      font-weight: 400;
+      src: local('Caveat Regular'), local('Caveat-Regular'), url(/journey/caveatForReward.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+  </style>
+  <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css[css] %>">
+  <% } %>
+  <!-- The first thing in any HTML file should be the charset -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="HELP PEOPLE DO BETTER">
+  <!-- Make the page mobile compatible -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Allow installing the app to the homescreen -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" type="image/png" href="/journey/favicon.ico"/>
+  <link href="/journey/splash-2048x2732.png" rel="apple-touch-startup-image" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link href="/journey/splash-1668x2224.png" rel="apple-touch-startup-image" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link href="/journey/splash-1536x2048.png" rel="apple-touch-startup-image" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link href="/journey/splash-1125x2436.png" rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+  <link href="/journey/splash-1242x2208.png" rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+  <link href="/journey/splash-750x1334.png" rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link href="/journey/splash-640x1136.png" rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+
+  <title>AMPOS</title>
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" as="script">
+  <% } %>
+</head>
+
+<body>
+  <!-- Display a message if JS has been disabled on the browser. -->
+  <noscript>If you're seeing this message, that means
+    <strong>JavaScript has been disabled on your browser</strong>, please
+    <strong>enable JS</strong> to make this app work.</noscript>
+
+  <!-- The app hooks into this div -->
+  <div id="app"></div>
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script defer type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+  <% } %>
+</body>
+
+</html>

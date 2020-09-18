@@ -1,0 +1,7 @@
+const translationMessages = {
+};
+
+export {
+  translationMessages,
+
+};
