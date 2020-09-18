@@ -107,7 +107,7 @@ const BlogFormModal = ({ show, onHide, id }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleHide}>
+    <Modal show={show} onHide={handleHide} backdrop="static">
       <Modal.Header closeButton>
         <Modal.Title>
           { _.isNil(id) ? 'Create' : 'Edit'}

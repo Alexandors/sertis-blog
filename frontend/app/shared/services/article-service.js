@@ -24,6 +24,10 @@ class ArticleService {
     getOne = (id) => {
       return axios.get(this.api + '/' + id);
     }
+
+    delete = (id) => {
+      return axios.delete(this.api + '/' + id);
+    }
 }
 
 

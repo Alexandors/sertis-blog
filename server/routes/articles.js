@@ -63,7 +63,9 @@ router.get('/', function(req, res, next) {
 
     articleService.getArticles({page, size}).then(result => {
         res.status(200)
-        res.send(result);
+        // res.set("X-Total-Count", result.total);
+        res.header('X-Total-Count', result.total)
+        res.send(result.data);
     }).catch(ex => {
         console.error(ex);
         res.status(400)

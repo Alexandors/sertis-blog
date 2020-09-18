@@ -2,12 +2,13 @@ import React, {useEffect, useState} from 'react';
 import useInjectReducer from 'hooks/useInjectReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fromJS } from 'immutable';
-import { Row, Container, Button } from 'react-bootstrap';
+import { Row, Container, Button, Modal } from 'react-bootstrap';
 import { ActionType } from 'global-constants';
 import _ from 'lodash';
 import * as actions from './actions';
 import BlogCard from './components/blog-card';
 import BlogFormModal from './components/blog-form-modal';
+import BlogDeleteModal from './components/blog-delete-modal';
 
 import './style.scss';
 
@@ -20,15 +21,26 @@ const BlogPage = () => {
     reducer: (
       state = fromJS({
         articleList: [],
+        hasMoreArticle: true,
+        isLoading: false,
+        totalArticle: 0,
       }),
       action
     ) => {
       switch (action.type) {
+        case ActionType.FETCH_ARTICLES_REQUEST:
+          return state.set('isLoading', true);
         case ActionType.FETCH_ARTICLES_SUCCESS:
           const articles = [...state.get('articleList'), ...action.payload];
-          return state.set('articleList', articles);
+          return state.set('articleList', articles)
+            .set('hasMoreArticle', _.size(action.payload) > 0)
+            .set('isLoading', false)
+            .set('totalArticle', action.totalCount);
         case ActionType.CLEAR_ARTICLE_LIST:
-          return state.set('articleList', []);
+          return state.set('articleList', [])
+            .set('hasMoreArticle', true)
+            .set('isLoading', false)
+            .set('totalArticle', 0);
         default:
           return state;
       }
@@ -37,26 +49,58 @@ const BlogPage = () => {
 
   const fetchArticles = (params) => dispatch(actions.fetchArticles(params));
 
-  const articleList = useSelector((state) => state.getIn([reducerKey, 'articleList']));
   const currentUser = useSelector((state) => state.getIn(['app', 'currentUser']));
+  const articleList = useSelector((state) => state.getIn([reducerKey, 'articleList']));
+  const hasMoreArticle = useSelector((state) => state.getIn([reducerKey, 'hasMoreArticle']));
+  const isLoading = useSelector((state) => state.getIn([reducerKey, 'isLoading']));
+  const totalArticle = useSelector((state) => state.getIn([reducerKey, 'totalArticle']));
 
   const [showFromDialog, setShowFormDialog] = useState(false);
+  const [showDeleteDialog, setDeleteFormDialog] = useState(false);
   const [editId, setEditId] = useState();
+  const [deleteId, setDeleteId] = useState();
+  const [loadMore, setLoadMore] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const handleCloseFormDialog = () => setShowFormDialog(false);
   const handleShowFormDialog = () => setShowFormDialog(true);
 
+  const handleCloseDeleteDialog = () => setDeleteFormDialog(false);
+  const handleShowDeleteDialog = () => setDeleteFormDialog(true);
 
   // componentDidMount
   useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    dispatch(actions.clearArticleList());
     onFetchArticles(0);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
+
+  useEffect(() => {
+    if (loadMore === true && hasMoreArticle === false) {
+      setLoadMore(false);
+    }
+  }, [hasMoreArticle]);
+
+  useEffect(() => {
+    if (_.isBoolean(isLoading)) {
+      setLoading(isLoading);
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    handleScroll();
+  }, [articleList]);
 
   // Function & Event Handler
   const onFetchArticles = (page) => {
     fetchArticles({
       page,
-      size: 20,
+      size: 8,
     });
   };
 
@@ -65,14 +109,44 @@ const BlogPage = () => {
     handleShowFormDialog();
   };
 
+
+
   const onFormDialogClose = (isNeedUpdate) => {
     handleCloseFormDialog();
     setEditId(null);
+
     if (isNeedUpdate === true) {
       dispatch(actions.clearArticleList());
-      fetchArticles(0);
+      setCurrentPage(0);
+      onFetchArticles(0);
     }
   };
+
+  const onLoadMore = () => {
+    onFetchArticles(currentPage + 1);
+    setCurrentPage(currentPage + 1);
+  }
+
+  const hasLoadMore = totalArticle && parseInt(totalArticle, 10) > _.size(articleList);
+
+  const handleScroll = () => {
+    if (window.innerHeight + document.documentElement.scrollTop + 10 > document.scrollingElement.scrollHeight) {
+      // console.log('scroll', hasLoadMore, loading, window.innerHeight + document.documentElement.scrollTop, document.scrollingElement.scrollHeight);
+      if (hasLoadMore === true && loading === false) {
+        onLoadMore();
+        console.log('Load More');
+      }
+    }
+  }
+  const onDeleteArticle = (id) => {
+    setDeleteId(id)
+    handleShowDeleteDialog();
+  }
+
+  const onDeleteDialogClose = () => {
+    setDeleteId(null);
+    handleCloseDeleteDialog();
+  }
 
   return (
     <Container fluid className="blog-page">
@@ -96,14 +170,28 @@ const BlogPage = () => {
             category={item.category}
             lastModified={item.lastModified}
             onEdit={(id) => onEditArticle(id)}
+            onDelete={(id) => onDeleteArticle(id)}
           />
         ))
+        }
+      </Row>
+      <Row className="load-more-panel">
+        {
+          hasLoadMore
+          && <Button onClick={onLoadMore} className="load-more-button">Load More</Button>
         }
       </Row>
       <BlogFormModal
         show={showFromDialog}
         onHide={onFormDialogClose}
         id={editId}
+      />
+
+      <BlogDeleteModal
+        show={showDeleteDialog}
+        onHide={onDeleteDialogClose}
+        id={deleteId}
+        articleList={articleList}
       />
     </Container>
   );

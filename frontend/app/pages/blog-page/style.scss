@@ -13,7 +13,16 @@
       .login-button {
       }
     }
+  }
 
+  .load-more-panel {
+    justify-content: center;
+    padding-bottom: 40px;
+    padding-top: 10px;
+
+    .load-more-button {
+      width: 200px;
+    }
   }
   .article-card {
     width: 30rem;
@@ -28,6 +37,10 @@
       justify-content: space-between;
 
       .edit-icon {
+        cursor: pointer;
+        margin-right: 8px;
+      }
+      .delete-icon {
         cursor: pointer;
       }
       .dot {
@@ -49,5 +62,17 @@
       display: flex;
       justify-content: space-between;
     }
+  }
+}
+
+.delete-article-name {
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.modal {
+  .modal-body {
+    min-height: auto;
   }
 }

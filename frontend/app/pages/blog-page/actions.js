@@ -13,6 +13,7 @@ export const fetchArticles = ({ page, size }) => (dispatch) => {
       dispatch({
         type: ActionType.FETCH_ARTICLES_SUCCESS,
         payload: res.data,
+        totalCount: res.headers['x-total-count'],
       });
     })
     .catch((err) => {
@@ -40,7 +41,6 @@ export const updateArticle = ({_id, name, content, status, category}) => (dispat
       payload: res.data
     })
   }).catch((err) => {
-    console.log(err);
     dispatch({ type: ActionType.SERVER_ERROR });
     dispatch(showServerError(err));
   });

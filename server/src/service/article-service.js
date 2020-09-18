@@ -71,10 +71,13 @@ exports.getArticles = async ({page, size}) => {
     for (let i=0; i<userIds.length;i++) {
         userList[userIds[i]] = await userService.getUserInfoById(userIds[i]);
     }
+    const total = await articleModel.count({});
 
-    return _.map(articles, article => {
+    const data = _.map(articles, article => {
         return assembleAritle(article, userList[article.authorId])
     })
+
+    return { data, total }
 }
 
 exports.getArticleById = async (id) => {

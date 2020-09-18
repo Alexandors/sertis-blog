@@ -3,12 +3,12 @@ import _ from 'lodash';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { getFormattedDate } from 'utils/date-utils';
 import classNames from 'classnames';
-import { PencilSquare } from 'react-bootstrap-icons';
+import { PencilSquare, Trash } from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 import { BlogStatus } from '../constants';
 
 const BlogCard = ({
-  id, name, content, author, lastModified, status, onEdit, category,
+  id, name, content, author, lastModified, status, onEdit, category, onDelete
 }) => {
   const currentUser = useSelector((state) => state.getIn(['app', 'currentUser']));
 
@@ -19,8 +19,12 @@ const BlogCard = ({
           <div>{category}</div>
           <div>
             { _.get(currentUser, '_id') === _.get(author, '_id')
-            && (<PencilSquare className="edit-icon" onClick={() => onEdit(id)}/>)
-            }
+            && (
+              <span>
+                <PencilSquare className="edit-icon" onClick={() => onEdit(id)}/>
+                <Trash className="delete-icon" onClick={() => onDelete(id)}/>
+              </span>
+            )}
             <div className={classNames('dot status', { published: status === BlogStatus.Published })} ></div>
           </div>
         </Card.Title>
