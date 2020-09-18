@@ -10,7 +10,9 @@ router.post('/', securityService.securityMiddleware, function(req, res, next) {
     const data = {
         name: req.body.name,
         content: req.body.content,
-        authorId: req.securityContext.userId
+        status: req.body.status,
+        category: req.body.category,
+        authorId: req.securityContext.userId,
     }
 
     articleService.createArticle(data).then(result => {
@@ -45,6 +47,12 @@ router.get('/', function(req, res, next) {
         res.send(ex);
     })
 
+});
+
+router.get('/categories', function(req, res, next) {
+    articleService.getArticleCategories().then(result => {
+        res.status(200).send(result);
+    });
 });
 
 module.exports = router;

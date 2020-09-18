@@ -7,7 +7,7 @@ import { PencilSquare } from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 
 const BlogCard = ({
-  id, name, content, author, lastModified, status, onEdit,
+  id, name, content, author, lastModified, status, onEdit, category,
 }) => {
   const currentUser = useSelector((state) => state.getIn(['app', 'currentUser']));
 
@@ -15,7 +15,7 @@ const BlogCard = ({
     <Card className="article-card">
       <Card.Body>
         <Card.Title>
-          <div>{name}</div>
+          <div>{category}</div>
           <div>
             { _.get(currentUser, '_id') === _.get(author, '_id')
             && (<PencilSquare className="edit-icon" onClick={() => onEdit(id)}/>)
@@ -23,7 +23,10 @@ const BlogCard = ({
             <div className={classNames('dot status', { Published: status === 'Published' })} ></div>
           </div>
         </Card.Title>
-        <Card.Text>{content}</Card.Text>
+        <Card.Subtitle className="mb-2 text-muted">{name}</Card.Subtitle>
+        <Card.Text>
+          <div>{content}</div>
+        </Card.Text>
         <ListGroup className="list-group-flush">
           <ListGroupItem className="footer">
             <span>{_.get(author, 'username')}</span>

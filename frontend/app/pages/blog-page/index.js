@@ -1,12 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import useInjectReducer from 'hooks/useInjectReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fromJS } from 'immutable';
-import { Row, Container, Button } from 'react-bootstrap';
+import { Row, Container, Button, Modal } from 'react-bootstrap';
 import { ActionType } from 'global-constants';
 import _ from 'lodash';
 import * as actions from './actions';
 import BlogCard from './components/blog-card';
+import BlogFormModal from './components/blog-form-modal';
 
 import './style.scss';
 
@@ -37,6 +38,13 @@ const BlogPage = () => {
   const articleList = useSelector((state) => state.getIn([reducerKey, 'articleList']));
   const currentUser = useSelector((state) => state.getIn(['app', 'currentUser']));
 
+  const [showFromDialog, setShowFormDialog] = useState(false);
+  const [editId, setEditId] = useState();
+
+  const handleCloseFormDialog = () => setShowFormDialog(false);
+  const handleShowFormDialog = () => setShowFormDialog(true);
+
+
   // componentDidMount
   useEffect(() => {
     onFetchArticles(0);
@@ -50,6 +58,15 @@ const BlogPage = () => {
     });
   };
 
+  const onEditArticle = (id) => {
+    setEditId(id);
+    handleShowFormDialog();
+  }
+
+  const onFormDialogClose = () => {
+    handleCloseFormDialog();
+    setEditId(null);
+  }
 
   return (
     <Container fluid className="blog-page">
@@ -57,7 +74,7 @@ const BlogPage = () => {
         <h1>Blog</h1>
         <div className="button-group">
           { currentUser
-          && <Button className="add-button">+ Add</Button>}
+          && <Button className="add-button" onClick={handleShowFormDialog}>+ Add</Button>}
         </div>
 
       </Row>
@@ -70,12 +87,18 @@ const BlogPage = () => {
             content={item.content}
             author={item.author}
             status={item.status}
+            category={item.category}
             lastModified={item.lastModified}
-            onEdit={(id) => {console.log(id)}}
+            onEdit={(id) => onEditArticle(id)}
           />
         ))
         }
       </Row>
+      <BlogFormModal
+        show={showFromDialog}
+        onHide={onFormDialogClose}
+        id={editId}
+      />
     </Container>
   );
 };

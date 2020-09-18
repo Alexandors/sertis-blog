@@ -1,8 +1,7 @@
 .login-component {
-  position: absolute;
+  position: relative;
   top: 10px;
-  width:100%;
-  padding-right: 60px;
+  float: right;
 
   .login-inner {
     display: flex;

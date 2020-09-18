@@ -5,7 +5,7 @@ const articleModel = mongoose.Schema({
     name: String,
     status: String,
     content: String,
-    categories: [String],
+    category: String,
     authorId: mongoose.Types.ObjectId,
     lastModified: Date
 })

@@ -20,3 +20,22 @@ export const fetchArticles = ({ page, size }) => (dispatch) => {
       dispatch(showServerError(err));
     });
 };
+
+export const saveArticle = ({name, content, status}) => (dispatch) => {
+  ArticleService.save({name, content, status}).then( res=> {
+    dispatch({
+      type: ActionType.SAVE_ARTICLE_SUCCESS,
+      payload: res.data
+    })
+  });
+}
+
+
+export const fetchCategories = () => (dispatch) => {
+  ArticleService.getCategories().then(res => {
+    dispatch({
+      type: ActionType.FETCH_CATEGORY_SUCCESS,
+      payload: res.data
+    })
+  });
+}

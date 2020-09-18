@@ -1,10 +1,11 @@
 const articleModel = require('../data-access-layer/modals/article-modal');
 const userService = require('../service/user-service');
-const _ = require("lodash");
 const moment = require('moment');
 const mongoose = require("mongoose");
+const constants = require('../common/constants');
+const _ = require('lodash');
 
-exports.createArticle = async ({name, content, authorId}) => {
+exports.createArticle = async ({name, content, authorId, status, category}) => {
     if (_.isEmpty(name)) {
         throw "Name is required";
     }
@@ -20,11 +21,19 @@ exports.createArticle = async ({name, content, authorId}) => {
         throw "Author not found."
     }
 
+    let articleStatus = constants.ArticleStatus.Draft
+    const foundStatus = _.find(constants.ArticleStatus, status);
+    if (!_.isNil(foundStatus)) {
+        articleStatus = foundStatus;
+    }
+
     try {
         const newArticle = new articleModel({
             _id: mongoose.Types.ObjectId(),
             name,
             content,
+            category,
+            status: articleStatus,
             authorId: author._id,
             lastModified: moment.utc()
         });
@@ -50,4 +59,8 @@ exports.getArticles = async ({page, size}) => {
         const {_doc} = article;
         return {..._doc, author: userList[article.authorId]}
     })
+}
+
+exports.getArticleCategories = async () => {
+    return ['Science', 'Physics', 'Technology'];
 }

@@ -21,6 +21,7 @@ const LoginComponent = () => {
       state = fromJS({
         token: null,
         isLoginFail: false,
+        isLogOut: false,
       }),
       action
     ) => {
@@ -32,7 +33,7 @@ const LoginComponent = () => {
         case ActionType.LOGIN_FAILED:
           return state.set('token', '').set('isLoginFail', true);
         case ActionType.LOG_OUT:
-          return state.set('token', '');
+          return state.set('token', '').set('isLogOut', true);
         default:
           return state;
       }
@@ -40,6 +41,7 @@ const LoginComponent = () => {
   });
   const token = useSelector((state) => state.getIn([reducerKey, 'token']));
   const isLoginFail = useSelector((state) => state.getIn([reducerKey, 'isLoginFail']));
+  const isLogOut = useSelector((state) => state.getIn([reducerKey, 'isLogOut']));
   const currentUser = useSelector((state) => state.getIn(['app', 'currentUser']));
 
   const [show, setShow] = useState(false);
@@ -56,6 +58,12 @@ const LoginComponent = () => {
       window.location.reload(false);
     }
   }, [token]);
+
+  useEffect(() => {
+    if (isLogOut === true) {
+      window.location.reload(false);
+    }
+  }, [isLogOut]);
 
   useEffect(() => {
     if (!_.isNil(currentUser)) {

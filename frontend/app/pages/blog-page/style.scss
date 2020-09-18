@@ -18,7 +18,10 @@
   .article-card {
     width: 30rem;
     margin: 5px;
-
+    .card-subtitle {
+      font-size: 16px;
+      color: black !important;
+    }
     .card-title {
       display: flex;
       text-overflow: ellipsis;
