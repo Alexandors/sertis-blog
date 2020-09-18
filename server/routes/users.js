@@ -3,10 +3,15 @@ const router = express.Router();
 const userService = require('../src/service/user-service');
 const authService = require("../src/service/authorization-service");
 const securityService = require('../src/service/security-service');
+const constants = require('../src/common/constants');
 const _ = require('lodash');
 
 // create user
 router.post('/', securityService.securityMiddleware, function(req, res, next) {
+  if (req.securityContext.userRole !== constants.UserRole.Admin) {
+    res.status(403).send('Only Admin can create users');
+    return;
+  }
   const data = {
     username: req.body.username,
     password: req.body.password,
@@ -14,6 +19,7 @@ router.post('/', securityService.securityMiddleware, function(req, res, next) {
   userService.createUser(data).then((result) => {
     res.status(200).send(result);
   }).catch(ex => {
+    console.error(ex);
     res.status(400).send(ex);
   });
 });
@@ -21,7 +27,7 @@ router.post('/', securityService.securityMiddleware, function(req, res, next) {
 // update user
 router.put('/', securityService.securityMiddleware, function(req, res, next) {
   if(req.securityContext.userId !== req.body._id) {
-    res.status(401).send("Only the user themselves can modify user data");
+    res.status(403).send("Only the user themselves can modify user data");
     return;
   }
 
@@ -32,6 +38,7 @@ router.put('/', securityService.securityMiddleware, function(req, res, next) {
   userService.updateUser(data).then((result) => {
     res.status(200).send(result);
   }).catch(ex => {
+    console.error(ex);
     res.status(400).send(ex);
   });
 });
@@ -62,6 +69,7 @@ router.post('/login', function(req, res, next) {
       res.status(401).send()
     }
   }).catch(ex => {
+    console.error(ex);
     res.status(500).send(ex)
   });
 });

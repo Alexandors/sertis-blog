@@ -1,6 +1,7 @@
 const userModal = require('../data-access-layer/modals/user-modal');
 const mongoose = require("mongoose");
-const securityService = require('./security-service')
+const securityService = require('./security-service');
+const constant = require('../common/constants')
 const _ = require("lodash");
 
 exports.createUser = async ({username, password}) => {
@@ -18,9 +19,11 @@ exports.createUser = async ({username, password}) => {
         const newUser = new userModal({
             _id: mongoose.Types.ObjectId(),
             username,
-            password: securityService.cryptPassword(password)
+            password: securityService.cryptPassword(password),
+            role: constant.UserRole.User
         });
-        return await newUser.save();
+        const result = await newUser.save();
+        return this.getUserInfoByUsername(result.username);
     } catch (ex) {
         console.error(ex)
     }
@@ -41,7 +44,14 @@ exports.updateUser = async ({ _id, password }) => {
         throw 'User ID: ' + _id + ' not found.'
     }
 
-    return await userModal.update({_id}, {$set: {password: securityService.cryptPassword(password)}});
+    try {
+        await userModal.update({_id}, {$set: {password: securityService.cryptPassword(password)}});
+        return this.getUserInfoByUsername(user.username);
+    } catch (ex) {
+        console.log(ex);
+    }
+
+    return null;
 }
 
 exports.getUser = async (id) => {

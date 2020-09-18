@@ -40,6 +40,6 @@ exports.securityMiddleware = (req, res, next) => {
     });
 }
 
-exports.jwtSign = ({ userId }) => {
-    return jwt.sign({ userId }, jwtSignKey, { expiresIn: '1d'});
+exports.jwtSign = ({ userId, userRole }) => {
+    return jwt.sign({ userId, userRole }, jwtSignKey, { expiresIn: '1d'});
 }

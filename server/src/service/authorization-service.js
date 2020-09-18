@@ -14,7 +14,7 @@ exports.login = async ({ username, password }) => {
         console.log('User ' + username + ' authorized: '+isAuth);
         if (isAuth === true) {
             return {
-                token: securityService.jwtSign({userId: user._id})
+                token: securityService.jwtSign({userId: user._id, userRole: user.role})
             };
         }
     } catch (ex) {
