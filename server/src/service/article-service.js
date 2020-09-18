@@ -21,19 +21,13 @@ exports.createArticle = async ({name, content, authorId, status, category}) => {
         throw "Author not found."
     }
 
-    let articleStatus = constants.ArticleStatus.Draft
-    const foundStatus = _.find(constants.ArticleStatus, status);
-    if (!_.isNil(foundStatus)) {
-        articleStatus = foundStatus;
-    }
-
     try {
         const newArticle = new articleModel({
             _id: mongoose.Types.ObjectId(),
             name,
             content,
             category,
-            status: articleStatus,
+            status: getArticleStatus(status),
             authorId: author._id,
             lastModified: moment.utc()
         });
@@ -42,8 +36,31 @@ exports.createArticle = async ({name, content, authorId, status, category}) => {
     } catch (ex) {
         console.error(ex)
     }
+}
 
+exports.updateArticle = async ({_id, name, content, authorId, status, category}) => {
+    const existArticle = await this.getArticleById(_id);
 
+    console.log(existArticle.authorId, authorId)
+    if (existArticle.authorId != authorId) {
+        throw "You don't have permission to update this article";
+    }
+
+    if (_.isEmpty(name)) {
+        throw "Name is required";
+    }
+
+    try {
+      await articleModel.update({_id}, {$set: {
+          name,
+          content,
+          status: getArticleStatus(status),
+          category,
+          lastModified: moment.utc()
+      }});
+    } catch (ex) {
+        console.error(ex)
+    }
 }
 
 exports.getArticles = async ({page, size}) => {
@@ -56,11 +73,29 @@ exports.getArticles = async ({page, size}) => {
     }
 
     return _.map(articles, article => {
-        const {_doc} = article;
-        return {..._doc, author: userList[article.authorId]}
+        return assembleAritle(article, userList[article.authorId])
     })
+}
+
+exports.getArticleById = async (id) => {
+    const article = await articleModel.where({_id: id}).findOne();
+    const user = await userService.getUserInfoById(article.authorId);
+
+    return assembleAritle(article, user)
 }
 
 exports.getArticleCategories = async () => {
     return ['Science', 'Physics', 'Technology'];
+}
+
+const assembleAritle = (article, user) => {
+    const {_doc} = article;
+    return {..._doc, author: user}
+}
+
+const getArticleStatus = (status) => {
+    if (!_.isNil(constants.ArticleStatus[status])) {
+        return status;
+    }
+    return constants.ArticleStatus.Draft;
 }

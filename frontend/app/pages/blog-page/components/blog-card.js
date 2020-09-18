@@ -5,6 +5,7 @@ import { getFormattedDate } from 'utils/date-utils';
 import classNames from 'classnames';
 import { PencilSquare } from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
+import { BlogStatus } from '../constants';
 
 const BlogCard = ({
   id, name, content, author, lastModified, status, onEdit, category,
@@ -20,7 +21,7 @@ const BlogCard = ({
             { _.get(currentUser, '_id') === _.get(author, '_id')
             && (<PencilSquare className="edit-icon" onClick={() => onEdit(id)}/>)
             }
-            <div className={classNames('dot status', { Published: status === 'Published' })} ></div>
+            <div className={classNames('dot status', { published: status === BlogStatus.Published })} ></div>
           </div>
         </Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{name}</Card.Subtitle>

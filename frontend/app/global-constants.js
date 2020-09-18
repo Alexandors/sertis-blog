@@ -34,4 +34,7 @@ export const ActionType = keyMirror({
   GET_USER_BY_ID_SUCCESS: null,
   SAVE_ARTICLE_SUCCESS: null,
   FETCH_CATEGORY_SUCCESS: null,
+  GET_ARTICLE_BY_ID_SUCCESS: null,
+  CLEAR_ARTICLE_EDIT: null,
+  CLEAR_ARTICLE_LIST: null,
 });

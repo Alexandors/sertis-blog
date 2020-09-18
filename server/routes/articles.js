@@ -26,6 +26,29 @@ router.post('/', securityService.securityMiddleware, function(req, res, next) {
 
 });
 
+
+// update an Article
+router.put('/', securityService.securityMiddleware, function(req, res, next) {
+    const data = {
+        _id: req.body._id,
+        name: req.body.name,
+        content: req.body.content,
+        status: req.body.status,
+        category: req.body.category,
+        authorId: req.securityContext.userId,
+    }
+    articleService.updateArticle(data).then(result => {
+        res.status(200);
+        res.send(result);
+    }).catch(ex => {
+        console.error(ex);
+        res.status(400);
+        res.send(ex);
+    })
+
+});
+
+
 // get Articles
 router.get('/', function(req, res, next) {
     let page = parseInt(req.query.page, 10);
@@ -54,5 +77,19 @@ router.get('/categories', function(req, res, next) {
         res.status(200).send(result);
     });
 });
+
+// get Articles by id
+router.get('/:id', function(req, res, next) {
+    articleService.getArticleById(req.params.id).then(result => {
+        res.status(200)
+        res.send(result);
+    }).catch(ex => {
+        console.error(ex);
+        res.status(400)
+        res.send(ex);
+    })
+
+});
+
 
 module.exports = router;

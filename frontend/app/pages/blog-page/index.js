@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import useInjectReducer from 'hooks/useInjectReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fromJS } from 'immutable';
-import { Row, Container, Button, Modal } from 'react-bootstrap';
+import { Row, Container, Button } from 'react-bootstrap';
 import { ActionType } from 'global-constants';
 import _ from 'lodash';
 import * as actions from './actions';
@@ -27,6 +27,8 @@ const BlogPage = () => {
         case ActionType.FETCH_ARTICLES_SUCCESS:
           const articles = [...state.get('articleList'), ...action.payload];
           return state.set('articleList', articles);
+        case ActionType.CLEAR_ARTICLE_LIST:
+          return state.set('articleList', []);
         default:
           return state;
       }
@@ -61,12 +63,16 @@ const BlogPage = () => {
   const onEditArticle = (id) => {
     setEditId(id);
     handleShowFormDialog();
-  }
+  };
 
-  const onFormDialogClose = () => {
+  const onFormDialogClose = (isNeedUpdate) => {
     handleCloseFormDialog();
     setEditId(null);
-  }
+    if (isNeedUpdate === true) {
+      dispatch(actions.clearArticleList());
+      fetchArticles(0);
+    }
+  };
 
   return (
     <Container fluid className="blog-page">
@@ -79,7 +85,7 @@ const BlogPage = () => {
 
       </Row>
       <Row>
-        { _.map(articleList, (item) => (
+        { _.isArray(articleList) && _.map(articleList, (item) => (
           item && <BlogCard
             key={item._id}
             id={item._id}

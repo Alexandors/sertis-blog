@@ -13,6 +13,10 @@ class ArticleService {
       return axios.post(this.api, data);
     }
 
+    update = (data) => {
+      return axios.put(this.api, data);
+    }
+
     getCategories = () => {
       return axios.get(this.api + '/categories');
     }

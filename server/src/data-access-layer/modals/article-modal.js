@@ -5,9 +5,9 @@ const articleModel = mongoose.Schema({
     name: String,
     status: String,
     content: String,
-    category: String,
     authorId: mongoose.Types.ObjectId,
-    lastModified: Date
+    lastModified: Date,
+    category: String,
 })
 
 module.exports = mongoose.model('article', articleModel);

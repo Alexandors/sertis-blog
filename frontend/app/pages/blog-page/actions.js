@@ -21,12 +21,28 @@ export const fetchArticles = ({ page, size }) => (dispatch) => {
     });
 };
 
-export const saveArticle = ({name, content, status}) => (dispatch) => {
-  ArticleService.save({name, content, status}).then( res=> {
+export const saveArticle = ({name, content, status, category}) => (dispatch) => {
+  ArticleService.save({name, content, status, category}).then( res=> {
     dispatch({
       type: ActionType.SAVE_ARTICLE_SUCCESS,
       payload: res.data
     })
+  }).catch((err) => {
+    dispatch({ type: ActionType.SERVER_ERROR });
+    dispatch(showServerError(err));
+  });
+}
+
+export const updateArticle = ({_id, name, content, status, category}) => (dispatch) => {
+  ArticleService.update({_id, name, content, status, category}).then( res=> {
+    dispatch({
+      type: ActionType.SAVE_ARTICLE_SUCCESS,
+      payload: res.data
+    })
+  }).catch((err) => {
+    console.log(err);
+    dispatch({ type: ActionType.SERVER_ERROR });
+    dispatch(showServerError(err));
   });
 }
 
@@ -37,5 +53,33 @@ export const fetchCategories = () => (dispatch) => {
       type: ActionType.FETCH_CATEGORY_SUCCESS,
       payload: res.data
     })
+  }).catch((err) => {
+    dispatch({ type: ActionType.SERVER_ERROR });
+    dispatch(showServerError(err));
+  });
+}
+
+
+export const getArticleById = (id) => (dispatch) => {
+  ArticleService.getOne(id).then(res => {
+    dispatch({
+      type: ActionType.GET_ARTICLE_BY_ID_SUCCESS,
+      payload: res.data
+    })
+  }).catch((err) => {
+    dispatch({ type: ActionType.SERVER_ERROR });
+    dispatch(showServerError(err));
+  });
+}
+
+export const clearEditArticle = () => (dispatch) => {
+  dispatch({
+    type: ActionType.CLEAR_ARTICLE_EDIT,
+  });
+}
+
+export const clearArticleList = () => (dispatch) => {
+  dispatch({
+    type: ActionType.CLEAR_ARTICLE_LIST,
   });
 }
