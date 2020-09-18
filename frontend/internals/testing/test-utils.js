@@ -20,7 +20,7 @@ const AllTheProviders = ({ children }) => (
   </Provider>
 );
 
-const customRender = (ui, { route = '/journey', initialEntries = [route], state, ...options } = {}) => {
+const customRender = (ui, { route = '/', initialEntries = [route], state, ...options } = {}) => {
   history = createMemoryHistory({ initialEntries, initialIndex: 0 });
   store = configureStore(state, history);
   return {

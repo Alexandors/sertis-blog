@@ -8,6 +8,10 @@ class UserService {
   getCurrentUser = () => {
     return axios.get(`${this.api}/me`);
   }
+
+  getUserById = (id) => {
+    return axios.get(`${this.api}/${id}`);
+  }
 }
 
 

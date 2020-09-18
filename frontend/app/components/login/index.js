@@ -53,6 +53,7 @@ const LoginComponent = () => {
   useEffect(() => {
     if (!_.isEmpty(token)) {
       setShow(false);
+      window.location.reload(false);
     }
   }, [token]);
 
@@ -101,7 +102,7 @@ const LoginComponent = () => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={onLogin}>
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
@@ -112,7 +113,7 @@ const LoginComponent = () => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group controlId="password">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"

@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import useInjectReducer from "../../hooks/useInjectReducer";
 import {fromJS} from "immutable";
 import {ActionType} from "../../global-constants";
-import _ from "lodash";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,6 +26,8 @@ const App = () => {
       switch (action.type) {
         case ActionType.FETCH_CURRENT_USER_SUCCESS:
           return state.set('currentUser', action.payload);
+        case ActionType.LOG_OUT:
+          return state.set('currentUser', null);
         default:
           return state;
       }
@@ -40,7 +41,6 @@ const App = () => {
   }, [isLoggedIn]);
 
   const fetchUser = () => {
-    console.log(isLoggedIn)
     if (isLoggedIn === true) {
       dispatch(actions.fetchCurrentUser());
     }

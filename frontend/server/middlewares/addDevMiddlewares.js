@@ -23,7 +23,7 @@ module.exports = function addDevMiddlewares(app, webpackConfig) {
   // artifacts, we use it instead
   const fs = middleware.fileSystem;
 
-  app.get('/journey/_bootstrap', (req, res) => {
+  app.get('/_bootstrap', (req, res) => {
     res.set({ 'Content-Type': 'text/plain' });
     const bootstrapPrefix = process.env.BOOTSTRAP_PREFIX || 'bluecrystal-bootstrap-dev';
     res.write(bootstrapPrefix);

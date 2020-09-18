@@ -20,7 +20,31 @@
     margin: 5px;
 
     .card-title {
+      display: flex;
       text-overflow: ellipsis;
+      justify-content: space-between;
+
+      .edit-icon {
+        cursor: pointer;
+      }
+      .dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        background-color: gray;
+
+        &.publish {
+          background-color: green;
+        }
+      }
+      .status {
+        margin-left: 8px;
+      }
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

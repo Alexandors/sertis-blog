@@ -6,7 +6,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
-const publicPath = '/journey/';
+const publicPath = '/';
 const appPath = path.resolve(__dirname, '../../app');
 const isAnalyze = process.env.ANALYZE === 'true';
 const isDEV = process.env.NODE_ENV === 'development';

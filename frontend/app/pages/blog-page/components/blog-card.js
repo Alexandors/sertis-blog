@@ -1,16 +1,39 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import _ from 'lodash';
+import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { getFormattedDate } from 'utils/date-utils';
+import classNames from 'classnames';
+import { PencilSquare } from 'react-bootstrap-icons';
+import { useSelector } from 'react-redux';
 
-const BlogCard = ({name, content, author, key}) => {
+const BlogCard = ({
+  id, name, content, author, lastModified, status, onEdit,
+}) => {
+  const currentUser = useSelector((state) => state.getIn(['app', 'currentUser']));
+
   return (
-    <Card key={key} className="article-card">
+    <Card className="article-card">
       <Card.Body>
-        <Card.Title>{name}</Card.Title>
+        <Card.Title>
+          <div>{name}</div>
+          <div>
+            { _.get(currentUser, '_id') === _.get(author, '_id')
+            && (<PencilSquare className="edit-icon" onClick={() => onEdit(id)}/>)
+            }
+            <div className={classNames('dot status', { Published: status === 'Published' })} ></div>
+          </div>
+        </Card.Title>
         <Card.Text>{content}</Card.Text>
-        {author}
+        <ListGroup className="list-group-flush">
+          <ListGroupItem className="footer">
+            <span>{_.get(author, 'username')}</span>
+            <span>{getFormattedDate(lastModified)}</span>
+          </ListGroupItem>
+        </ListGroup>
+
       </Card.Body>
     </Card>
   );
-}
+};
 
 export default BlogCard;

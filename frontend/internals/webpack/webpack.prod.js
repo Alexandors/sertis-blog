@@ -6,7 +6,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const publicPath = '/journey/';
+const publicPath = '/';
 
 module.exports = require('./webpack.base')({
   mode: 'production',

@@ -85,4 +85,13 @@ router.get('/me', securityService.securityMiddleware, function(req, res, next) {
   });
 });
 
+router.get('/:id', securityService.securityMiddleware, function(req, res, next) {
+  userService.getUserInfoById(req.params.id).then((result) => {
+    if (_.isNil(result)) {
+      res.status(404).send();
+      return;
+    }
+    res.status(200).send(result);
+  });
+});
 module.exports = router;

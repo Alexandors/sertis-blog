@@ -31,4 +31,5 @@ export const ActionType = keyMirror({
   LOGIN_FAILED:null,
   FETCH_CURRENT_USER_SUCCESS: null,
   LOG_OUT: null,
+  GET_USER_BY_ID_SUCCESS: null,
 });

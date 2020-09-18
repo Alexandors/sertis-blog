@@ -39,5 +39,15 @@ exports.createArticle = async ({name, content, authorId}) => {
 
 exports.getArticles = async ({page, size}) => {
     const skip = (parseInt(page)) * parseInt(size);
-    return articleModel.find({}).sort({lastModified: -1}).limit(size).skip(skip);
+    const articles = await articleModel.find({}).sort({lastModified: -1}).limit(size).skip(skip);
+    const userIds = _.uniq(_.map(articles, "authorId"))
+    const userList = [];
+    for (let i=0; i<userIds.length;i++) {
+        userList[userIds[i]] = await userService.getUserInfoById(userIds[i]);
+    }
+
+    return _.map(articles, article => {
+        const {_doc} = article;
+        return {..._doc, author: userList[article.authorId]}
+    })
 }

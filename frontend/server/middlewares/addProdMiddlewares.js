@@ -78,7 +78,7 @@ module.exports = function addProdMiddlewares(app, options) {
    * Apply redirection filter to all requests
    */
   const versionFile = path.resolve(outputPath, 'version.json');
-  app.get(['/version', '/journey/version'], (req, res) => {
+  app.get(['/version', '/version'], (req, res) => {
     res.set({
       'Content-Type': 'application/json',
     });
@@ -88,7 +88,7 @@ module.exports = function addProdMiddlewares(app, options) {
   /**
    * AWS ELB pings this URL to make sure the instance is running
    */
-  app.get(['/health', '/journey/health'], (req, res) => {
+  app.get(['/health', '/health'], (req, res) => {
     res.set({
       'Content-Type': 'text/plain',
       'Content-Length': 2,
@@ -97,7 +97,7 @@ module.exports = function addProdMiddlewares(app, options) {
     res.status(200).end();
   });
 
-  app.get('/journey/_bootstrap', (req, res) => {
+  app.get('/_bootstrap', (req, res) => {
     res.set({ 'Content-Type': 'text/plain' });
     const bootstrapPrefix = process.env.BOOTSTRAP_PREFIX || 'bluecrystal-bootstrap';
     res.write(bootstrapPrefix);

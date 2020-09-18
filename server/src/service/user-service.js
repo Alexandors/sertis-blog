@@ -64,14 +64,16 @@ exports.getUserByUsername = async (username) => {
 
 exports.getUserInfoByUsername = async (username) => {
     const user = await this.getUserByUsername(username)
-    _.set(user, 'password', null);
-    return user;
+    return getUserInfo(user);
 }
 
 exports.getUserInfoById = async (id) => {
     const user = await this.getUser(id)
-    _.set(user, 'password', null);
-    return user;
+    return getUserInfo(user);
+}
+
+const getUserInfo = (user) => {
+    return {username: _.get(user, 'username'), _id: _.get(user, '_id')};
 }
 
 

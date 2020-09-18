@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
-const publicPath = '/journey/';
+const publicPath = '/';
 
 module.exports = require('./webpack.base')({
   mode: 'development',
