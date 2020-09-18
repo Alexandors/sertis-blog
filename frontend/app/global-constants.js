@@ -26,4 +26,7 @@ export const ActionType = keyMirror({
   CLEAR_NOTIFICATION_MESSAGE: null,
   FETCH_ARTICLES_REQUEST:null,
   FETCH_ARTICLES_SUCCESS:null,
+  LOGIN_REQUEST:null,
+  LOGIN_SUCCESS:null,
+  LOGIN_FAILED:null,
 });

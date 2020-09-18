@@ -1,0 +1,12 @@
+.login-component {
+  position: absolute;
+  top: 10px;
+  width:100%;
+  padding-right: 60px;
+
+  .login-inner {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+}

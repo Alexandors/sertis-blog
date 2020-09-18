@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import useInjectReducer from 'hooks/useInjectReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fromJS } from 'immutable';
@@ -51,8 +51,12 @@ const BlogPage = () => {
 
   return (
     <Container fluid className="blog-page">
-      <Row>
+      <Row className="header">
         <h1>Blog</h1>
+        <div className="button-group">
+          <Button className="add-button">+ Add</Button>
+        </div>
+
       </Row>
       <Row>
         { _.map(articleList, (item) => (
