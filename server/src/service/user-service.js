@@ -4,7 +4,6 @@ const securityService = require('./security-service')
 const _ = require("lodash");
 
 exports.createUser = async ({username, password}) => {
-
     if(_.isNil(username)) {
         throw 'Username is required.'
     }
@@ -27,6 +26,24 @@ exports.createUser = async ({username, password}) => {
     }
 }
 
+exports.updateUser = async ({ _id, password }) => {
+    if(_.isNil(_id)) {
+        throw '_id is required.'
+    }
+
+    if(_.isNil(password)) {
+        throw 'Password is required.'
+    }
+
+    const user = await userModal.where({_id}).findOne();
+
+    if (_.isNil(user)) {
+        throw 'User ID: ' + _id + ' not found.'
+    }
+
+    return await userModal.update({_id}, {$set: {password: securityService.cryptPassword(password)}});
+}
+
 exports.getUser = async (id) => {
     return userModal.findById(id);
 }
@@ -34,3 +51,10 @@ exports.getUser = async (id) => {
 exports.getUserByUsername = async (username) => {
     return await userModal.where({username}).findOne();
 }
+
+exports.getUserInfoByUsername = async (username) => {
+    const user = await this.getUserByUsername(username)
+    _.set(user, 'password', null);
+    return user;
+}
+
