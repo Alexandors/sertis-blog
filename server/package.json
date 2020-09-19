@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon bin/www.js"
+    "start": "nodemon bin/www.js",
+    "test": "jest --watch-All --coverage"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -22,6 +23,8 @@
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4",
+    "sinon": "^9.0.3"
   }
 }

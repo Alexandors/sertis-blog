@@ -125,7 +125,7 @@ const BlogFormModal = ({ show, onHide, id }) => {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-              { _.map(categories, (item) => (<option value={item}>{item}</option>))}
+              { _.map(categories, (item) => (<option key={item+id} value={item}>{item}</option>))}
             </Form.Control>
           </Form.Group>
           <Form.Group >

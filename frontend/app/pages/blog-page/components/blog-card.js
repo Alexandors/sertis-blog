@@ -13,7 +13,7 @@ const BlogCard = ({
   const currentUser = useSelector((state) => state.getIn(['app', 'currentUser']));
 
   return (
-    <Card className="article-card">
+    <Card className="article-card" data-testid="article-card">
       <Card.Body>
         <Card.Title>
           <div>{category}</div>

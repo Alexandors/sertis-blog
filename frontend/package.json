@@ -178,7 +178,7 @@
     "redux-immutable": "4.0.0",
     "redux-thunk": "2.3.0",
     "reselect": "4.0.0",
-    "rimraf": "2.6.2",
+    "rimraf": "^2.6.2",
     "sanitize.css": "10.0.0",
     "sass-loader": "7.1.0",
     "sass-resources-loader": "2.0.1",

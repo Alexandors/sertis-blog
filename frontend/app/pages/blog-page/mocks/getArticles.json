@@ -1,0 +1,122 @@
+{
+  "status": 200,
+  "headers": {
+    "x-total-count": 50
+  },
+  "response": [
+    {
+      "_id": "5f64d12c4400d06f5b1370fe",
+      "name": "Article 1",
+      "content": "Deutsches Ipsum Dolor meliore persecuti Sauerkraut mel. Te oratio utamur vix. Mesut Özil eloquentiam eu per. Principes complectitur Brezel no. His illud moderatius ut, Wurst pro omnis minim epicurei, natum Aperol Spritz mel ei. Sea purto singulis Aufenthaltsgenehmigung",
+      "category": "Physics",
+      "status": "Published",
+      "authorId": "5f641d4bf9388e02132b27c3",
+      "lastModified": "2020-09-18T16:58:16.211Z",
+      "__v": 0,
+      "author": {
+        "username": "user1",
+        "_id": "5f641d4bf9388e02132b27c3"
+      }
+    },
+    {
+      "_id": "5f64ca7a4400d06f5b1370fd",
+      "name": "Test add",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to ma",
+      "category": "Technology",
+      "status": "Draft",
+      "authorId": "5f641ab5140d5a01f5490bf2",
+      "lastModified": "2020-09-18T14:55:54.035Z",
+      "__v": 0,
+      "author": {
+        "username": "admin",
+        "_id": "5f641ab5140d5a01f5490bf2"
+      }
+    },
+    {
+      "_id": "5f64b50b8aec536e89b3ede5",
+      "categories": [],
+      "name": "2 Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classica",
+      "content": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical",
+      "status": "Draft",
+      "authorId": "5f641ab5140d5a01f5490bf2",
+      "lastModified": "2020-09-18T14:55:34.119Z",
+      "__v": 0,
+      "category": "Physics",
+      "author": {
+        "username": "admin",
+        "_id": "5f641ab5140d5a01f5490bf2"
+      }
+    },
+    {
+      "_id": "5f64b54b8aec536e89b3ede6",
+      "categories": [],
+      "name": "1. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classica",
+      "content": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical",
+      "status": "Draft",
+      "authorId": "5f641ab5140d5a01f5490bf2",
+      "lastModified": "2020-09-18T14:54:05.177Z",
+      "__v": 0,
+      "category": "Technology",
+      "author": {
+        "username": "admin",
+        "_id": "5f641ab5140d5a01f5490bf2"
+      }
+    },
+    {
+      "_id": "5f64b4778aec536e89b3ede4",
+      "categories": [],
+      "name": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classica",
+      "content": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical",
+      "status": "Draft",
+      "authorId": "5f641ab5140d5a01f5490bf2",
+      "lastModified": "2020-09-18T14:53:26.052Z",
+      "__v": 0,
+      "category": "Technology",
+      "author": {
+        "username": "admin",
+        "_id": "5f641ab5140d5a01f5490bf2"
+      }
+    },
+    {
+      "_id": "5f64c0224400d06f5b1370fc",
+      "name": "Create from another User",
+      "content": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, mak",
+      "category": "Physics",
+      "status": "Published",
+      "authorId": "5f641d4bf9388e02132b27c3",
+      "lastModified": "2020-09-18T14:11:46.289Z",
+      "__v": 0,
+      "author": {
+        "username": "user1",
+        "_id": "5f641d4bf9388e02132b27c3"
+      }
+    },
+    {
+      "_id": "5f64a6f82d58b86e03ca79ee",
+      "categories": [],
+      "name": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classica",
+      "content": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical",
+      "status": "Draft",
+      "authorId": "5f641ab5140d5a01f5490bf2",
+      "lastModified": "2020-09-18T12:24:24.429Z",
+      "__v": 0,
+      "author": {
+        "username": "admin",
+        "_id": "5f641ab5140d5a01f5490bf2"
+      }
+    },
+    {
+      "_id": "5f6423a723667f033e13c7da",
+      "categories": [],
+      "name": "Article 3",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lore",
+      "authorId": "5f641ab5140d5a01f5490bf2",
+      "lastModified": "2020-09-18T03:04:07.239Z",
+      "__v": 0,
+      "author": {
+        "username": "admin",
+        "_id": "5f641ab5140d5a01f5490bf2"
+      }
+    }
+  ]
+}

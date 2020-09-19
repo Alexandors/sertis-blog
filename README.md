@@ -2,11 +2,13 @@
 Arnon Kaewmahawong
 
 ## Server
-Server code is in the `/server`
+Server code is in the `/server`. This project cannot run on Windows due to some encryption libraries.
 
 To run the server
 
 `npm i`
+
+`npm i -g nodemon`
 
 `npm start`
 
@@ -20,13 +22,15 @@ To start run frontend:
 
 `npm i`
 
-For running the first time you may have to rebuild `node-sass` as follow:
+For running the first time you may have to rebuild `node-sass` as follows:
 
 `npm rebuild node-sass`
 
 To start:
 
 `npm start`
+
+The frontend will run in port `3000`
 
 
 

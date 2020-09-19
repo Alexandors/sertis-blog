@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'WebJourney',
+  displayName: 'Blog',
   collectCoverageFrom: [
     'app/**/*.{js,jsx}',
     '!app/**/*.test.{js,jsx}',
@@ -7,8 +7,6 @@ module.exports = {
     '!app/index.js',
     '!app/global-styles.js',
     '!app/*/*/Loadable.{js,jsx}',
-    '!app/utils/form-utils.js',
-    '!app/pages/login-page/*',
     '!app/pages/not-found-page/*',
     '!app/translations/messages.js',
     '!app/sw.js',

@@ -128,10 +128,13 @@ const BlogPage = () => {
   const hasLoadMore = totalArticle && parseInt(totalArticle, 10) > _.size(articleList);
 
   const handleScroll = () => {
-    if (window.innerHeight + document.documentElement.scrollTop + 10 > document.scrollingElement.scrollHeight) {
+    const windowInnerHeight = _.get(window, 'innerHeight', 0);
+    const scrollTop = _.get(document, ['documentElement', 'scrollTop'], 0);
+    const scrollHeight = _.get(document, ['documentElement', 'scrollHeight'], 0)
+    if (windowInnerHeight + scrollTop + 10 > scrollHeight) {
       // console.log('scroll', hasLoadMore, loading, window.innerHeight + document.documentElement.scrollTop, document.scrollingElement.scrollHeight);
       if (hasLoadMore === true && loading === false) {
-        onLoadMore();
+        onLoadMore();w
         console.log('Load More');
       }
     }
@@ -185,8 +188,8 @@ const BlogPage = () => {
       </Row>
       <Row className="load-more-panel">
         {
-          hasLoadMore
-          && <Button onClick={onLoadMore} className="load-more-button">Load More</Button>
+          hasLoadMore === true
+          && <Button onClick={onLoadMore} className="load-more-button" data-testid="load-more-button">Load More</Button>
         }
       </Row>
       <BlogFormModal
