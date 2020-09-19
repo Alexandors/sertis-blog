@@ -94,4 +94,18 @@ router.get('/:id', securityService.securityMiddleware, function(req, res, next) 
     res.status(200).send(result);
   });
 });
+
+router.delete('/:id', securityService.securityMiddleware, function(req, res, next) {
+  if (req.securityContext.userRole !== constants.UserRole.Admin) {
+    res.status(403).send('Only Admin can delete users');
+    return;
+  }
+
+  userService.deleteUser(req.params.id).then((result) => {
+    res.status(200).send();
+  }).catch(ex => {
+    console.error(ex);
+    res.status(500).send(ex)
+  });
+});
 module.exports = router;

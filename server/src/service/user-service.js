@@ -72,6 +72,15 @@ exports.getUserInfoById = async (id) => {
     return getUserInfo(user);
 }
 
+exports.deleteUser = async (id) => {
+    try {
+        await userModal.deleteOne({_id: id});
+    }catch (ex) {
+        console.error(ex);
+        throw ex;
+    }
+}
+
 const getUserInfo = (user) => {
     return {username: _.get(user, 'username'), _id: _.get(user, '_id')};
 }
